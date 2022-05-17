@@ -21,17 +21,24 @@ public class EVA3_13_MEORAR_CAPTURA_EDAD {
     public static void main(String[] args) {
         // TODO code application logic here
            
+      boolean datoErroneo = true; //El usuario siempre se equivoca
         Scanner input = new Scanner(System.in);
-        try{
-        System.out.println("Introduce tu edad (numero entero)");
-        int iedad= input.nextInt();
-        if (iedad < 0)
-        throw new Exception("");
-        }catch(){
-            
-        }
-        System.out.println("Tu edad: " + iedad);
-        
+        do {
+            try {
+                
+                System.out.println("Introduce tu edad(numero entero): ");
+                int iedad = input.nextInt();
+                if (iedad < 0)
+                    throw new Exception("El valor =" + iedad + "No es una edad valida");
+                datoErroneo = false;
+                System.out.println("Tu edad es: " + iedad);
+            } catch (InputMismatchException e) {
+                System.out.println(input.next() + " no es un número válido");
+            } catch (Exception e){
+                System.out.println("Edad no valida");
+            }
+
+        } while (datoErroneo);
     }
     
 }
