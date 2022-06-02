@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package eva3_22_serializable_arreglos;
 
@@ -19,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author invitado
+ * @author Jesús Alejandro Torres Ramírez
  */
 public class EVA3_22_SERIALIZABLE_ARREGLOS {
 
@@ -38,7 +34,7 @@ public class EVA3_22_SERIALIZABLE_ARREGLOS {
         miListaPerso.add(new Persona ("Espiridion", "Perez"));
         miListaPerso.add(new Persona ("Paz", "Perez"));
         escribirObj(miListaPerso);
-        leerObj(); 
+        leerObj(miListaPerso); 
         
     }
     public static void escribirObj(Object obj){

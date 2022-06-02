@@ -27,7 +27,7 @@ public class EVA3_21_SERIALIZABLE {
         //DEBEMOS HACER QUE LA CLASE IMPLEMENTE LA INTERFAZ SERIALIZABLE
         Persona persona = new Persona("Pedro", "Páramo");
         escribirObj(persona);
-        leerObj();
+        leerObj(persona);
     }
     
     //GUARDAR OBJETOS
