@@ -1,5 +1,3 @@
-
-
 package eva3_22_serializable_arreglos;
 
 import java.io.FileInputStream;
@@ -26,55 +24,52 @@ public class EVA3_22_SERIALIZABLE_ARREGLOS {
         // TODO code application logic here
         ArrayList<Persona> miListaPerso = new ArrayList(); //Collections <TIPOS DE DATOS GENERICOS>
         //JAVA --> LISTAS, ARREGLOS, ETC: 0 --> N- 1
-        miListaPerso.add(new Persona ("Juan", "Perez"));//0
-        miListaPerso.add(new Persona ("Pedro", "Perez"));//1
-        miListaPerso.add(new Persona ("Ana", "Perez"));//2
-        miListaPerso.add(new Persona ("Florentino", "Perez"));
-        miListaPerso.add(new Persona ("Antonio", "Perez"));
-        miListaPerso.add(new Persona ("Espiridion", "Perez"));
-        miListaPerso.add(new Persona ("Paz", "Perez"));
+        miListaPerso.add(new Persona("Juan", "Perez"));//0
+        miListaPerso.add(new Persona("Luis", "Miguel"));//1
+        miListaPerso.add(new Persona("Alejandro", "Perez"));//2
+        miListaPerso.add(new Persona("Florentino", "Perez"));
         escribirObj(miListaPerso);
-        leerObj(miListaPerso); 
-        
+        leerObj();
+
     }
-    public static void escribirObj(Object obj){
+
+    public static void escribirObj(Object obj) {
+
         try {
             FileOutputStream abrirArch = new FileOutputStream("c:/ARCHIVOS/archivo3.obj");
-            try {
-                ObjectOutputStream guardarObj = new ObjectOutputStream(abrirArch);
-                guardarObj.writeObject(obj);
-                guardarObj.flush();
-                guardarObj.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            ObjectOutputStream guardarObj = new ObjectOutputStream(abrirArch);
+            guardarObj.writeObject(obj);
+            guardarObj.flush();
+            guardarObj.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static void leerObj() {
+        try {
+            FileInputStream abrirArch = new FileInputStream("c:/ARCHIVOS/archivo3.obj");
+            ObjectInputStream leerObjeto = new ObjectInputStream(abrirArch);
+            ArrayList<Persona> miListaPerso = (ArrayList<Persona>) leerObjeto.readObject();//OBJETO (Class Object)
+            
+            for (int i = 0; i < miListaPerso.size(); i++) {
+                Persona persona = miListaPerso.get(i);
+                System.out.println("Nombre: " + persona.getNombre() + " | Apellido: " + persona.getApellido());
             }
         } catch (FileNotFoundException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
+        } catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
-        
+
     }
-    
-    public static void leerObj(Object obj){
-        try {
-                FileInputStream abrirArch = new FileInputStream("c:/ARCHIVOS/archivo3.obj");
-                ObjectInputStream leerObjeto = new ObjectInputStream(abrirArch);
-                ArrayList<Persona> miListaPerso = (ArrayList<Persona>)leerObjeto.readObject();//OBJETO (Class Object)
-                for(int i = 0; i < miListaPerso.size(); i++){
-                    Persona persona = miListaPerso.get(i);
-                System.out.println("Nombre: " + persona.getNombre() + " " + persona.getApellido());
-                }
-            }catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException | ClassNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        
-        } 
-    }
+}
 
+class Persona implements Serializable {
 
-
-class Persona implements Serializable{
     private String nombre;
     private String apellido;
 
@@ -101,5 +96,5 @@ class Persona implements Serializable{
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    
+
 }

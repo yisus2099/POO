@@ -27,7 +27,7 @@ public class EVA3_21_SERIALIZABLE {
         //DEBEMOS HACER QUE LA CLASE IMPLEMENTE LA INTERFAZ SERIALIZABLE
         Persona persona = new Persona("Pedro", "Páramo");
         escribirObj(persona);
-        leerObj(persona);
+        leerObj();
     }
     
     //GUARDAR OBJETOS
@@ -39,27 +39,29 @@ public class EVA3_21_SERIALIZABLE {
                 guardarObj.writeObject(obj);
                 guardarObj.flush();
                 guardarObj.close();
-            } catch (IOException ex) {
-                Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         
     }
     //LEER OBJETOS
-     public static void leerObj(Object obj){
+     public static void leerObj(){
         try {
                 FileInputStream abrirArch = new FileInputStream("c:/ARCHIVOS/archivo3.obj");
                 ObjectInputStream leerObjeto = new ObjectInputStream(abrirArch);
                 Persona persona = (Persona)leerObjeto.readObject();//OBJETO (Class Object)
-                System.out.println("Nombre: " + persona.getNombre() + " " + persona.getApellido());//Falta que CORRAAAAAAAAAAAAA
-               
-            }catch (FileNotFoundException ex) {
-                Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException | ClassNotFoundException ex) {
-                Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                System.out.println("Nombre: " + persona.getNombre() + " " + persona.getApellido());
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+           ex.printStackTrace();
+        }
         
         } 
     }
